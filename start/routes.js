@@ -1,25 +1,19 @@
 'use strict'
 
-const { RouteGroup } = require('@adonisjs/framework/src/Route/Manager')
+const { RouteGroup, route } = require('@adonisjs/framework/src/Route/Manager')
 
-/*
-|--------------------------------------------------------------------------
-| Routes
-|--------------------------------------------------------------------------
-|
-| Http routes are entry points to your web application. You can create
-| routes for different URL's and bind Controller actions to them.
-|
-| A complete guide on routing is available here.
-| http://adonisjs.com/docs/4.1/routing
-|
-*/
 
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
-Route.group(()=>{
-    Route.get('/getProductos', 'ProductoController.getProducto')
-    Route.post('/postProductos', 'ProductoController.store')
-}).prefix('api/v1')
 
- 
+//Login
+Route.post('/login', 'AuthController.login')
+//registro de user
+Route.post('users', 'UserController.store')
+
+
+//ruta con token y usando apiresource
+Route.group(() => {
+  Route.resource('providers', 'ProviderController')
+
+}).middleware(['auth'])

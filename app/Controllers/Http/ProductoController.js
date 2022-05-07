@@ -1,4 +1,7 @@
 'use strict'
+
+const auth = require("@adonisjs/auth");
+
 const Productos = use ("App/Models/Producto")
 class ProductoController {
     async store({ request, response }){
@@ -13,7 +16,7 @@ class ProductoController {
         })
     }
 
-    async getProducto({response}){
+    async index({response}){
         const data = await Productos.query().fetch()
 
         return response.ok({
@@ -21,8 +24,18 @@ class ProductoController {
             data: data
         })
     }
-    
-    
+
+    async destroy({params}){
+      const {id} = params
+      const product = await Productos.find(id);
+
+      await product.delete();
+
+      return response.ok({
+        message: "Se ha eliminado correctamente"
+      });
+    }
+
 }
 
 
