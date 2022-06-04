@@ -7,7 +7,7 @@ class UserController {
         const user = await User.create(userData)
 
         return response.created({
-            status: true,
+            status: 200,
             data: user
         })
     }

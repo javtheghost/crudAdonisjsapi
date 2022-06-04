@@ -16,4 +16,8 @@ Route.post('users', 'UserController.store')
 Route.group(() => {
   Route.resource('providers', 'ProviderController')
 
-}).middleware(['auth'])
+})
+/*Route.group(() => {
+  Route.resource('providers', 'ProviderController')
+
+}).middleware(['auth'])*/
